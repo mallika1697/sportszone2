@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Products - Sports Zone</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #111;
+            color: #FDF137;
+            text-align: center;
+            padding: 22px;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 18px;
+        }
+
+        .logo img {
+            width: 200px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 35px;
+color:#ffcc00;	
+        }
+
+        header p {
+            margin: 6px;
+            color: #cccccc;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            background: #222;
+            padding: 15px;
+            text-align: center;
+        }
+
+
+
+
+ nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #facc15;
+        }
+
+        /* TITLE */
+
+        .title {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .title h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #666;
+        }
+.search-box {
+    text-align:center;
+    margin:0 auto 30px;
+}
+
+.search-box input {
+    width:300px;
+    padding:12px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.search-box button {
+    padding:12px 20px;
+    margin-left:5px;
+    background:#facc15;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+        /* PRODUCTS */
+
+        .products {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 21px;
+            margin: 15px 0 8px;
+        }
+
+        .brand {
+            color: #777;
+        }
+
+        .price {
+            color: #16a34a;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* VIEW DETAILS BUTTON */
+
+        .btn {
+            background: #facc15;
+            color: #111;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background: #eab308;
+        }
+
+        /* FULL SCREEN DETAILS */
+
+        #detailsPage {
+            display: none;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            background: white;
+
+            z-index: 9999;
+
+            overflow-y: auto;
+        }
+
+        .details-header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .details-header h1 {
+            margin: 0;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+
+            background: #facc15;
+            color: #111;
+
+            border: none;
+            border-radius: 50%;
+
+            width: 45px;
+            height: 45px;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .details-content {
+            max-width: 1100px;
+            margin: 40px auto;
+
+            padding: 30px;
+
+            display: flex;
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .details-image {
+            width: 45%;
+            text-align: center;
+        }
+
+        .details-image img {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            object-fit: contain;
+        }
+
+        .details-info {
+            width: 55%;
+        }
+
+        .details-info h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .details-brand {
+            color: #777;
+            font-size: 20px;
+        }
+
+        .details-price {
+            color: #16a34a;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .details-info h3 {
+            font-size: 23px;
+            margin-top: 25px;
+        }
+
+        .details-info p {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .details-info li {
+            font-size: 18px;
+            margin: 12px 0;
+        }
+
+        .back-button {
+            background: #111827;
+            color: white;
+
+            border: none;
+
+            padding: 13px 25px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background: #374151;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 800px) {
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .details-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .details-image,
+            .details-info {
+                width: 100%;
+            }
+
+            .details-image img {
+                height: 300px;
+            }
+
+        }
+
+        @media(max-width: 550px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                margin: 5px;
+                display: inline-block;
+            }
+
+            .details-info h2 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        <img src="logo1.png" alt="Sports Zone Logo">
+    </div>
+
+    <h1>SPORTS ZONE</h1>
+
+    <p>Premium Sports Equipment Store</p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="dm.html">Home</a>
+
+    <a href="categories.html">Categories</a>
+
+    <a href="products.html">Products</a>
+
+    <a href="aus.html">About Us</a>
+
+    <a href="contact.html">Contact</a>
+<a href="#"> 🛒 Cart<span id="cartCount">0</span></a>
+
+</nav>
+
+
+<!-- PRODUCTS SECTION -->
+
+<div id="productsSection">
+
+    <div class="title">
+
+        <h2>Our Products</h2>
+
+        <p>Explore our premium sports equipment</p>
+
+    </div>
+<div class="search-box">
+    <input type="text" id="searchInput"
+ placeholder="Search products..."
+onkeyup="searchProducts()">
+    <button onclick="searchProducts()">🔍 Search</button>
+</div>
+
+
+    <div class="products">
+
+
+        <!-- 1 CRICKET BAT -->
+
+        <div class="product-card">
+
+            <img src="bat.jpeg" alt="Cricket Bat">
+
+            <h3>Cricket Bat</h3>
+
+            <p class="brand">DSC Sports</p>
+
+            <p class="price">₹999</p>
+
+            <button class="btn"
+            onclick="showDetails(0)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 2 FOOTBALL -->
+
+        <div class="product-card">
+
+            <img src="football.jpeg" alt="Football">
+
+            <h3>Premium Football</h3>
+
+            <p class="brand">Nivia</p>
+
+            <p class="price">₹1,499</p>
+
+            <button class="btn"
+            onclick="showDetails(1)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 3 BASKETBALL -->
+
+        <div class="product-card">
+
+            <img src="basketball.jpeg" alt="Basketball">
+
+            <h3> Basketball</h3>
+
+            <p class="brand">Wilson</p>
+
+            <p class="price">₹1,799</p>
+
+            <button class="btn"
+            onclick="showDetails(2)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 4 BADMINTON -->
+
+        <div class="product-card">
+
+            <img src="racket.jpeg" alt="Badminton Racket">
+
+            <h3>Badminton Racket</h3>
+
+            <p class="brand">Yonex</p>
+
+            <p class="price">₹1,999</p>
+
+            <button class="btn"
+            onclick="showDetails(3)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 5 SPORTS SHOES -->
+
+        <div class="product-card">
+
+            <img src="nike.jpg" alt="Sports Shoes">
+
+            <h3>Professional Sports Shoes</h3>
+
+            <p class="brand">Nike</p>
+
+            <p class="price">₹2,499</p>
+
+            <button class="btn"
+            onclick="showDetails(4)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 6 CRICKET HELMET -->
+
+        <div class="product-card">
+
+            <img src="helmet.jpeg" alt="Cricket Helmet">
+
+            <h3>Cricket Helmet</h3>
+
+            <p class="brand">SG</p>
+
+            <p class="price">₹1,899</p>
+
+            <button class="btn"
+            onclick="showDetails(5)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 7 CRICKET GLOVES -->
+
+        <div class="product-card">
+
+            <img src="gloves.jpeg" alt="Cricket Gloves">
+
+            <h3>Cricket Gloves</h3>
+
+            <p class="brand">SS Sports</p>
+
+            <p class="price">₹999</p>
+
+            <button class="btn"
+            onclick="showDetails(6)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 8 TENNIS RACKET -->
+
+        <div class="product-card">
+
+            <img src="tennis.jpeg" alt="Tennis Racket">
+
+            <h3>Tennis Racket</h3>
+
+            <p class="brand">Wilson</p>
+
+            <p class="price">₹2,499</p>
+
+            <button class="btn"
+            onclick="showDetails(7)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 9 VOLLEYBALL -->
+
+        <div class="product-card">
+
+            <img src="volleyball.jpeg" alt="Volleyball">
+
+            <h3>Premium Volleyball</h3>
+
+            <p class="brand">Nivia</p>
+
+            <p class="price">₹899</p>
+
+            <button class="btn"
+            onclick="showDetails(8)">
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- 10 TABLE TENNIS -->
+
+        <div class="product-card">
+
+            <img src="tt.jpeg" alt="Table Tennis Bat">
+
+            <h3>Table Tennis Bat</h3>
+
+            <p class="brand">Stag</p>
+
+            <p class="price">₹799</p>
+
+            <button class="btn"
+            onclick="showDetails(9)">
+                View Details
+            </button>
+
+        </div>
+
+<!-- 11 Hockey -->
+
+        <div class="product-card">
+
+            <img src="hockey.jpeg" alt="Hockey stick">
+
+            <h3>Hockey stick</h3>
+
+            <p class="brand">Fighters</p>
+
+            <p class="price">₹1,599</p>
+
+            <button class="btn"
+            onclick="showDetails(10)">
+                View Details
+            </button>
+
+        </div>
+
+
+<!-- 12 Football Net -->
+
+        <div class="product-card">
+
+            <img src="net.jpeg" alt="Football Net">
+
+            <h3>Football Net</h3>
+
+            <p class="brand">Forza</p>
+
+            <p class="price">₹1,299</p>
+
+            <button class="btn"
+            onclick="showDetails(11)">
+                View Details
+            </button>
+
+        </div>
+
+
+<!-- 13 Rugby -->
+
+        <div class="product-card">
+
+            <img src="rugby.jpeg" alt="Rugby Ball">
+
+            <h3>Rugby Ball</h3>
+
+            <p class="brand">Victeam</p>
+
+            <p class="price">₹1,199</p>
+
+            <button class="btn"
+            onclick="showDetails(12)">
+                View Details
+            </button>
+
+        </div>
+<!-- 14 Archery -->
+
+        <div class="product-card">
+
+            <img src="arrow.jpeg" alt="Archery Arrow">
+
+            <h3>Archery Arrow</h3>
+
+            <p class="brand">Zeal</p>
+
+            <p class="price">₹1,999</p>
+
+            <button class="btn"
+            onclick="showDetails(13)">
+                View Details
+            </button>
+
+        </div>
+<!-- 15 Chess Board-->
+
+        <div class="product-card">
+
+            <img src="chess.jpeg" alt="Chess Board">
+
+            <h3>Chess Board</h3>
+
+            <p class="brand">Paramount</p>
+
+            <p class="price">₹300</p>
+
+            <button class="btn"
+            onclick="showDetails(14)">
+                View Details
+            </button>
+
+        </div>
+<!-- 16 Ludo Board-->
+
+        <div class="product-card">
+
+            <img src="ludo.jpeg" alt="Carrom Board">
+
+            <h3>Ludo Board</h3>
+
+            <p class="brand">Toyshine</p>
+
+            <p class="price">₹250</p>
+
+            <button class="btn"
+            onclick="showDetails(15)">
+                View Details
+            </button>
+
+        </div>
+<!-- 17 Skate Board-->
+
+        <div class="product-card">
+
+            <img src="skate.jpeg" alt="Skate Board">
+
+            <h3>Skate Board</h3>
+
+            <p class="brand">Jaspo</p>
+
+            <p class="price">₹1,499</p>
+
+            <button class="btn"
+            onclick="showDetails(16)">
+                View Details
+            </button>
+
+        </div>
+<!-- 18 Sports Jersey-->
+
+        <div class="product-card">
+
+            <img src="jersey.jpeg" alt="Sports Jersey">
+
+            <h3>Sports Jersey</h3>
+
+            <p class="brand">Emirates</p>
+
+            <p class="price">₹500</p>
+
+            <button class="btn"
+            onclick="showDetails(17)">
+                View Details
+            </button>
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+<!-- FULL PRODUCT DETAILS PAGE -->
+
+<div id="detailsPage">
+
+    <div class="details-header">
+
+        <h1>SPORTS ZONE</h1>
+
+        <button class="close-button"
+        onclick="closeDetails()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="details-content">
+
+
+        <div class="details-image">
+
+            <img id="detailImage"
+            src=""
+            alt="Product">
+
+        </div>
+
+
+        <div class="details-info">
+
+            <h2 id="detailName"></h2>
+
+            <p class="details-brand">
+
+                Brand:
+                <span id="detailBrand"></span>
+
+            </p>
+
+
+            <div class="details-price"
+            id="detailPrice">
+            </div>
+
+
+            <h3>Description</h3>
+
+            <p id="detailDescription"></p>
+
+
+            <h3>Features</h3>
+
+            <ul id="detailFeatures"></ul>
+<button class="cart-button" onclick="addToCart()">
+🛒 Add to Cart
+</button>
+            <button class="buy-button"
+            onclick="buyNow()">
+
+ ⚡Buy Now
+</button>
+
+            <button class="back-button"
+            onclick="closeDetails()">
+
+                ← Back to Products
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Sports Zone |
+        Premium Sports Equipment Store
+    </p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+function searchProducts() {
+    let searchText =
+        document.getElementById("searchInput")
+.value
+.toLowerCase();
+
+    let cards=document.querySelectorAll(".product-card");
+
+    cards.forEach(function(card) {
+        let productName=card
+.querySelector("h3")
+.innerText
+.toLowerCase();
+        if(searchText===""||
+        productName.includes(searchText)){
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+}
+let selectedProduct = null;
+
+function buyNow() {
+    if (selectedProduct === null) {
+        alert("Please select a product first.");
+        return;
+    }
+
+    localStorage.setItem(
+        "buyProduct",
+        JSON.stringify(selectedProduct)
+    );
+
+    window.location.href = "buy.html";
+}
+    const products = [
+
+        {
+            name: "Cricket Bat",
+            brand: "DSC Sports",
+            price: "₹999",
+            image: "bat.jpeg",
+            description: "A premium cricket bat designed for good balance, comfort and performance. It is suitable for cricket practice and matches.",
+            features: [
+                "English Willow",
+                "Lightweight Design",
+                "Strong Bat Body",
+                "Comfortable Grip",
+                "Good Balance"
+            ]
+        },
+
+
+        {
+            name: "Premium Football",
+            brand: "Nivia",
+            price: "₹1,499",
+            image: "football.jpeg",
+            description: "A durable football designed for training, practice and recreational play with good control.",
+            features: [
+                "Durable Outer Surface",
+                "Good Grip",
+                "Easy Ball Control",
+                "Training Friendly",
+                "Suitable for Outdoor Play"
+            ]
+        },
+
+
+        {
+            name: " Basketball",
+            brand: "Wilson",
+            price: "₹1,799",
+            image: "basketball.jpeg",
+            description: "A quality basketball designed for good handling and comfortable play on indoor and outdoor courts.",
+            features: [
+                "Excellent Grip",
+                "Durable Surface",
+                "Good Ball Control",
+                "Indoor and Outdoor Use",
+                "Training Friendly"
+            ]
+        },
+
+
+        {
+            name: "Badminton Racket",
+            brand: "Yonex",
+            price: "₹1,999",
+            image: "racket.jpeg",
+            description: "A lightweight badminton racket designed for comfortable handling, control and regular practice.",
+            features: [
+                "Lightweight Frame",
+                "Good Control",
+                "Balanced Design",
+                "Comfortable Grip",
+                "Training Friendly"
+            ]
+        },
+
+
+        {
+            name: "Professional Sports Shoes",
+            brand: "Nike",
+            price: "₹3,499",
+            image: "nike.jpg",
+            description: "Comfortable sports shoes designed for active sports, training and everyday athletic activities.",
+            features: [
+                "Lightweight Design",
+                "Cushioned Sole",
+                "Good Grip",
+                "Comfortable Fit",
+                "Sports Friendly Design"
+            ]
+        },
+
+
+        {
+            name: "Cricket Helmet",
+            brand: "SG",
+            price: "₹1,899",
+            image: "helmet.jpeg",
+            description: "A cricket helmet designed to provide comfortable head protection during cricket practice and matches.",
+            features: [
+                "Protective Design",
+                "Comfortable Fit",
+                "Strong Outer Shell",
+                "Adjustable Fit",
+                "Suitable for Cricket"
+            ]
+        },
+
+
+        {
+            name: "Cricket Gloves",
+            brand: "SS Sports",
+            price: "₹999",
+            image: "gloves.jpeg",
+            description: "Comfortable cricket gloves designed to provide grip and protection while playing cricket.",
+            features: [
+                "Comfortable Padding",
+                "Good Grip",
+                "Lightweight Design",
+                "Protective Design",
+                "Suitable for Practice"
+            ]
+        },
+
+
+        {
+            name: "Tennis Racket",
+            brand: "Wilson",
+            price: "₹2,499",
+            image: "tennis.jpeg",
+            description: "A tennis racket designed for comfortable handling, good control and regular tennis practice.",
+            features: [
+                "Lightweight Frame",
+                "Good Control",
+                "Comfortable Grip",
+                "Balanced Design",
+                "Training Friendly"
+            ]
+        },
+
+
+        {
+            name: "Premium Volleyball",
+            brand: "Nivia",
+            price: "₹899",
+            image: "volleyball.jpeg",
+            description: "A durable volleyball suitable for training, recreational games and regular volleyball practice.",
+            features: [
+                "Durable Surface",
+                "Good Grip",
+                "Comfortable Handling",
+                "Training Friendly",
+                "Suitable for Outdoor Play"
+            ]
+        },
+
+
+        {
+            name: "Table Tennis Bat",
+            brand: "Stag",
+            price: "₹799",
+            image: "tt.jpeg",
+            description: "A table tennis bat designed for comfortable handling, good control and regular practice.",
+            features: [
+                "Comfortable Handle",
+                "Good Grip",
+                "Lightweight Design",
+                "Good Control",
+                "Training Friendly"
+            ]
+        },
+{
+            name: "Hockey Stick",
+            brand: "Fighters",
+            price: "₹1,599",
+            image: "hockey.jpeg",
+            description: "A strong hockey stick designed for comfortable handling and better control during hockey practice and games.",
+            features: [
+                "Strong Stick Body",
+                "Comfortable Grip",
+                "Good Ball Control",
+                "Lightweight Design",
+                "Suitable for Hockey"
+            ]
+        },
+
+        {
+            name: "Football Net",
+            brand: "Forza",
+            price: "₹1,299",
+            image: "net.jpeg",
+            description: "A durable football net designed for practice and regular football games.",
+            features: [
+                "Strong Net Material",
+                "Durable Design",
+                "Easy to Install",
+                "Suitable for Football",
+                "Training Friendly"
+            ]
+        },
+
+        {
+            name: "Rugby Ball",
+            brand: "Victeam",
+            price: "₹1,199",
+            image: "rugby.jpeg",
+            description: "A durable rugby ball designed for comfortable handling, training and regular play.",
+            features: [
+                "Durable Outer Surface",
+                "Good Grip",
+                "Easy Handling",
+                "Strong Construction",
+                "Training Friendly"
+            ]
+        },
+
+        {
+            name: "Archery Arrow",
+            brand: "Zeal",
+            price: "₹1,999",
+            image: "arrow.jpeg",
+            description: "A lightweight archery arrow designed for practice and controlled target shooting.",
+            features: [
+                "Lightweight Design",
+                "Strong Shaft",
+                "Good Balance",
+                "Smooth Finish",
+                "Practice Friendly"
+            ]
+        },
+
+        {
+            name: "Chess Board",
+            brand: "Paramount",
+            price: "₹3   00",
+            image: "chess.jpeg",
+            description: "A classic chess board designed for comfortable playing and chess practice.",
+            features: [
+                "Classic Board Design",
+                "Easy to Carry",
+                "Clear Squares",
+                "Smooth Surface",
+                "Suitable for Practice"
+            ]
+        },
+
+   {
+            name: "Ludo Board",
+            brand: "Toyshine",
+            price: "₹250",
+            image: "ludo.jpeg",
+            description: "A classic ludo board designed for fun and comfortable gameplay with family and friends.",
+            features: [
+                "Classic Ludo Design",
+                "Smooth Playing Surface",
+                "Easy to Carry",
+                "Clear Board Layout",
+                "Suitable for Family Games"
+            ]
+        },
+
+        {
+            name: "Skate Board",
+            brand: "Jaspo",
+            price: "₹1,499",
+            image: "skate.jpeg",
+            description: "A durable skateboard designed for recreational skating and beginner-level practice.",
+            features: [
+                "Strong Board Construction",
+                "Smooth Wheels",
+                "Comfortable Foot Space",
+                "Durable Design",
+                "Suitable for Beginners"
+            ]
+        },
+
+        {
+            name: "Sports Jersey",
+            brand: "Emirates",
+            price: "₹500",
+            image: "jersey.jpeg",
+            description: "A comfortable sports jersey designed for sports practice, training and team activities.",
+            features: [
+                "Lightweight Fabric",
+                "Comfortable Fit",
+                "Breathable Design",
+                "Easy to Wear",
+                "Suitable for Sports"
+            ]
+        }
+];
+    
+
+
+    function showDetails(index) {
+
+        let product = products[index];
+selectedProduct=product;
+
+
+        document.getElementById("detailImage").src =
+            product.image;
+
+
+        document.getElementById("detailName").innerHTML =
+            product.name;
+
+
+        document.getElementById("detailBrand").innerHTML =
+            product.brand;
+
+
+        document.getElementById("detailPrice").innerHTML =
+            product.price;
+
+
+        document.getElementById("detailDescription").innerHTML =
+            product.description;
+
+
+        let featureList =
+            document.getElementById("detailFeatures");
+
+
+        featureList.innerHTML = "";
+
+
+        product.features.forEach(function(feature) {
+
+            let li = document.createElement("li");
+
+            li.innerHTML = "✓ " + feature;
+
+            featureList.appendChild(li);
+
+        });
+
+
+        document.getElementById("productsSection")
+        .style.display = "none";
+
+
+        document.getElementById("detailsPage")
+        .style.display = "block";
+
+
+        window.scrollTo(0, 0);
+
+    }
+function closeDetails() {
+
+    document.getElementById("detailsPage")
+    .style.display = "none";
+
+    document.getElementById("productsSection")
+    .style.display = "block";
+
+    window.scrollTo(0, 0);
+}
+
+
+function addToCart() {
+
+    let productName =
+        document.getElementById("detailName").innerHTML;
+
+    let productBrand =
+        document.getElementById("detailBrand").innerHTML;
+
+    let productPrice =
+        document.getElementById("detailPrice").innerHTML;
+
+    let productImage =
+        document.getElementById("detailImage").src;
+
+    let product = {
+        name: productName,
+        brand: productBrand,
+        price: productPrice,
+        image: productImage
+    };
+
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push(product);
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+updateCartCount();
+
+    alert("✅ Product added to cart!");
+}
+function updateCartCount() {
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+}
+function searchProducts() {
+    let search = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".product-card");
+
+    cards.forEach(function(card) {
+        let name = card.querySelector("h3").innerText.toLowerCase();
+
+        if (name.includes(search)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+updateCartCount();
+
+
+
+</script>
+
+
+</body>
+</html>
